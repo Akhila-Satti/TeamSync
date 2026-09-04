@@ -33,6 +33,8 @@ import com.projects.teamsync.repository.EmailVerificationRepository;
 import com.projects.teamsync.repository.StudentRepository;
 import com.projects.teamsync.repository.StudentSkillRepository;
 
+import main.java.com.projects.teamsync.dto.StudentSearchResponse;
+
 @Service
 public class StudentService {
 
@@ -695,4 +697,43 @@ public class StudentService {
                 true,
                 "Profile updated successfully");
     }
+
+    public List<StudentSearchResponse> searchStudents(
+        String userName) {
+
+    if (userName == null || userName.isBlank()) {
+
+        throw new BadRequestException(
+                "Username is required");
+    }
+
+    List<Student> students =
+            studentRepository
+                    .findByUserNameContainingIgnoreCase(
+                            userName.strip());
+
+    List<StudentSearchResponse> response =
+            new ArrayList<>();
+
+    for (Student student : students) {
+
+        StudentSearchResponse studentResponse =
+                new StudentSearchResponse();
+
+        studentResponse.setStudentId(
+                student.getId());
+
+        studentResponse.setUserName(
+                student.getUserName());
+
+        studentResponse.setBio(
+                student.getBio());
+
+        
+
+        response.add(studentResponse);
+    }
+
+    return response;
+}
 }

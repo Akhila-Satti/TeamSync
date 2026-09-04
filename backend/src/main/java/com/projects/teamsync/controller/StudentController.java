@@ -1,5 +1,7 @@
 package com.projects.teamsync.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.projects.teamsync.dto.ApiResponse;
 import com.projects.teamsync.dto.ChangePasswordRequest;
@@ -21,9 +24,12 @@ import com.projects.teamsync.dto.RegisterRequest;
 import com.projects.teamsync.dto.ResetPasswordRequest;
 import com.projects.teamsync.dto.StudentProfileResponse;
 import com.projects.teamsync.dto.UpdateStudentProfile;
+import main.java.com.projects.teamsync.dto.StudentSearchResponse;
 import com.projects.teamsync.dto.VerifyOtpRequest;
 
 import com.projects.teamsync.service.StudentService;
+
+import main.java.com.projects.teamsync.dto.StudentSearchResponse;
 
 @RestController
 @RequestMapping("/api/students")
@@ -210,4 +216,16 @@ public class StudentController {
                                 request)
         );
     }
+
+    @GetMapping("/search")
+public ResponseEntity<List<StudentSearchResponse>>
+        searchStudents(
+                @RequestParam String userName) {
+
+    return ResponseEntity.ok(
+
+            studentService
+                    .searchStudents(userName)
+    );
+}
 }
