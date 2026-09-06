@@ -38,6 +38,8 @@ public void registerStompEndpoints(
 
     registry.addEndpoint("/ws")
         .setAllowedOrigins("http://localhost:5173")
+        .setAllowedOrigins("https://team-sync-395gkumfe-team-sync1.vercel.app")
+        .setAllowedOrigins("https://team-sync-neon.vercel.app")
         .withSockJS();
 }
 
