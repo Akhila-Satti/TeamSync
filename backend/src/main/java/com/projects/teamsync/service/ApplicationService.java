@@ -30,6 +30,7 @@ import com.projects.teamsync.exception.ResourceNotFoundException;
 import com.projects.teamsync.exception.UnauthorizedException;
 
 import com.projects.teamsync.repository.ApplicationRepository;
+import com.projects.teamsync.repository.InvitationRepository;
 import com.projects.teamsync.repository.ProjectMemberRepository;
 import com.projects.teamsync.repository.ProjectRepository;
 import com.projects.teamsync.repository.StudentRepository;
@@ -47,7 +48,7 @@ public class ApplicationService {
     private StudentSkillRepository studentSkillRepository;
     private NotificationService notificationService;
     private ProjectMemberRepository projectMemberRepository;
-
+    private InvitationRepository invitationRepository;
 
     public ApplicationService(
             ApplicationRepository applicationRepository,
@@ -55,63 +56,42 @@ public class ApplicationService {
             StudentRepository studentRepository,
             StudentSkillRepository studentSkillRepository,
             ProjectMemberRepository projectMemberRepository,
-            NotificationService notificationService) {
+            NotificationService notificationService,
+        InvitationRepository invitationRepository) {
 
-        this.applicationRepository =
-                applicationRepository;
-
-        this.studentRepository =
-                studentRepository;
-
-        this.projectRepository =
-                projectRepository;
-
-        this.studentSkillRepository =
-                studentSkillRepository;
-
-        this.projectMemberRepository =
-                projectMemberRepository;
-
-        this.notificationService =
-                notificationService;
+        this.applicationRepository = applicationRepository;
+        this.studentRepository = studentRepository;
+        this.projectRepository = projectRepository;
+        this.studentSkillRepository = studentSkillRepository;
+        this.projectMemberRepository = projectMemberRepository;
+        this.notificationService = notificationService;
+        this.invitationRepository=invitationRepository;
     }
-
 
     // ================= CREATE APPLICATION =================
 
-    public ApiResponse createApplication(
-            Integer projectId) {
+    public ApiResponse createApplication(Integer projectId) {
 
+        Student student = getAuthenticatedStudent();
 
-        Student student =
-                getAuthenticatedStudent();
+        Project project = projectRepository
+                .findById(projectId)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Project not found"));
 
-
-        Project project =
-                projectRepository
-                        .findById(projectId)
-                        .orElseThrow(() ->
-                                new ResourceNotFoundException(
-                                        "Project not found"));
-
-
-        if (project.getStatus() ==
-                ProjectStatus.CLOSED) {
+        if (project.getStatus() == ProjectStatus.CLOSED) {
 
             throw new BadRequestException(
                     "Cannot apply to a closed project");
         }
 
-
         if (student.getId()
-                .equals(
-                        project.getCreatedBy()
-                                .getId())) {
+                .equals(project.getCreatedBy().getId())) {
 
             throw new BadRequestException(
                     "Project creator cannot apply to their own project");
         }
-
 
         boolean isApplied =
                 applicationRepository
@@ -119,13 +99,11 @@ public class ApplicationService {
                                 student,
                                 project);
 
-
         if (isApplied) {
 
             throw new ConflictException(
                     "You have already applied to this project");
         }
-
 
         boolean alreadyMember =
                 projectMemberRepository
@@ -133,20 +111,23 @@ public class ApplicationService {
                                 project,
                                 student);
 
-
         if (alreadyMember) {
 
             throw new ConflictException(
                     "You are already a member of this project");
         }
+        boolean isInvited=invitationRepository.existsByProjectAndSentTo(project, student);
+        if (isInvited) {
 
+            throw new ConflictException(
+                    "You are already invited to this project");
+        }
 
         long currentMembers =
                 projectMemberRepository
                         .countByProjectAndStatus(
                                 project,
                                 ProjectMemberStatus.ACTIVE);
-
 
         if (currentMembers >=
                 project.getDesiredTeamSize()) {
@@ -155,182 +136,185 @@ public class ApplicationService {
                     "Project team is already full");
         }
 
-
         Application application =
                 new Application();
 
-
         application.setStudent(student);
-
         application.setProject(project);
-
         application.setStatus(
                 ApplicationStatus.PENDING);
-
         application.setCreatedAt(
                 LocalDateTime.now());
 
+        applicationRepository.save(application);
 
-        applicationRepository.save(
-                application);
-
-
-        notificationService
-                .createNotification(
-
-                        project.getCreatedBy(),
-
-                        NotificationType.APPLICATION_RECEIVED,
-
-                        student.getUserName()
-                                + " has applied for your project "
-                                + project.getName()
-                                + ". Review the application to accept or reject."
-                );
-
+        notificationService.createNotification(
+                project.getCreatedBy(),
+                NotificationType.APPLICATION_RECEIVED,
+                student.getUserName()
+                        + " has applied for your project "
+                        + project.getName()
+                        + ". Review the application to accept or reject.");
 
         return new ApiResponse(
                 true,
                 "Application created successfully");
     }
 
+    // ================= MY APPLICATIONS =================
+
+    public List<ApplicationResponse> getMyApplications() {
+
+        Student student = getAuthenticatedStudent();
+
+        List<Application> applications =
+                applicationRepository.findByStudent(student);
+
+        List<ApplicationResponse> responses =
+                new ArrayList<>();
+
+        for (Application application : applications) {
+
+            ApplicationResponse response =
+                    new ApplicationResponse();
+
+            response.setApplicationId(
+                    application.getId());
+
+            response.setApplicantId(
+                    student.getId());
+
+            response.setUserName(
+                    student.getUserName());
+
+            // Project information
+            response.setProjectId(
+                    application.getProject().getId());
+
+            response.setProjectName(
+                    application.getProject().getName());
+
+            response.setProjectDescription(
+                    application.getProject().getDescription());
+
+            response.setStatus(
+                    application.getStatus());
+
+            response.setDate(
+                    application.getCreatedAt());
+
+            // Student skills
+            List<StudentSkill> studentSkills =
+                    studentSkillRepository
+                            .findByStudent(student);
+
+            List<Skill> skills =
+                    new ArrayList<>();
+
+            for (StudentSkill studentSkill :
+                    studentSkills) {
+
+                skills.add(
+                        studentSkill.getSkill());
+            }
+
+            response.setSkills(skills);
+
+            responses.add(response);
+        }
+
+        return responses;
+    }
 
     // ================= VIEW APPLICATIONS =================
 
-    public List<ApplicationResponse>
-            viewApplications(
-                    Integer projectId) {
+    public List<ApplicationResponse> viewApplications(
+            Integer projectId) {
 
+        Student student = getAuthenticatedStudent();
 
-        Student student =
-                getAuthenticatedStudent();
-
-
-        Project project =
-                projectRepository
-                        .findById(projectId)
-                        .orElseThrow(() ->
-                                new ResourceNotFoundException(
-                                        "Project not found"));
-
+        Project project = projectRepository
+                .findById(projectId)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Project not found"));
 
         if (!student.getId()
-                .equals(
-                        project.getCreatedBy()
-                                .getId())) {
+                .equals(project.getCreatedBy().getId())) {
 
             throw new UnauthorizedException(
                     "You are not authorized to view applications for this project");
         }
 
-
         List<Application> allApplied =
                 applicationRepository
-                        .findByProject(
-                                project);
+                        .findByProject(project);
 
-
-        List<ApplicationResponse>
-                allApplications =
+        List<ApplicationResponse> allApplications =
                 new ArrayList<>();
 
+        for (Application app : allApplied) {
 
-        for (Application app :
-                allApplied) {
-
-
-            ApplicationResponse
-                    applicationResponse =
+            ApplicationResponse applicationResponse =
                     new ApplicationResponse();
 
+            applicationResponse.setApplicantId(
+                    app.getStudent().getId());
 
-            applicationResponse
-                    .setApplicantId(
+            applicationResponse.setApplicationId(
+                    app.getId());
 
-                            app.getStudent()
-                                    .getId()
-                    );
+            applicationResponse.setDate(
+                    app.getCreatedAt());
 
+            // Project information
+            applicationResponse.setProjectId(
+                    app.getProject().getId());
 
-            applicationResponse
-                    .setApplicationId(
+            applicationResponse.setProjectName(
+                    app.getProject().getName());
 
-                            app.getId()
-                    );
+            applicationResponse.setProjectDescription(
+                    app.getProject().getDescription());
 
-
-            applicationResponse
-                    .setDate(
-
-                            app.getCreatedAt()
-                    );
-
-
-            List<StudentSkill>
-                    studentSkills =
-
+            // Applicant skills
+            List<StudentSkill> studentSkills =
                     studentSkillRepository
                             .findByStudent(
                                     app.getStudent());
 
-
-            List<Skill>
-                    skills =
+            List<Skill> skills =
                     new ArrayList<>();
-
 
             for (StudentSkill studentSkill :
                     studentSkills) {
 
-
                 Skill skill =
-                        studentSkill
-                                .getSkill();
-
+                        studentSkill.getSkill();
 
                 skills.add(skill);
             }
 
+            applicationResponse.setSkills(skills);
 
-            applicationResponse
-                    .setSkills(
-                            skills);
+            applicationResponse.setStatus(
+                    app.getStatus());
 
+            applicationResponse.setUserName(
+                    app.getStudent().getUserName());
 
-            applicationResponse
-                    .setStatus(
-
-                            app.getStatus()
-                    );
-
-
-            applicationResponse
-                    .setUserName(
-
-                            app.getStudent()
-                                    .getUserName()
-                    );
-
-
-            allApplications
-                    .add(
-                            applicationResponse);
+            allApplications.add(
+                    applicationResponse);
         }
-
 
         return allApplications;
     }
 
-
     // ================= UPDATE APPLICATION STATUS =================
 
-    public ApiResponse
-            updateApplicationStatus(
-
-                    Integer applicationId,
-
-                    ApplicationStatusRequest request) {
-
+    public ApiResponse updateApplicationStatus(
+            Integer applicationId,
+            ApplicationStatusRequest request) {
 
         if (request == null ||
                 request.getApplicationStatus() == null) {
@@ -339,10 +323,7 @@ public class ApplicationService {
                     "Application status is required");
         }
 
-
-        Student student =
-                getAuthenticatedStudent();
-
+        Student student = getAuthenticatedStudent();
 
         Application application =
                 applicationRepository
@@ -351,20 +332,15 @@ public class ApplicationService {
                                 new ResourceNotFoundException(
                                         "Application not found"));
 
-
         Project project =
                 application.getProject();
 
-
         if (!student.getId()
-                .equals(
-                        project.getCreatedBy()
-                                .getId())) {
+                .equals(project.getCreatedBy().getId())) {
 
             throw new UnauthorizedException(
                     "You are not authorized to update this application");
         }
-
 
         if (application.getStatus()
                 != ApplicationStatus.PENDING) {
@@ -373,27 +349,20 @@ public class ApplicationService {
                     "Application status cannot be changed");
         }
 
-
         ApplicationStatus status =
                 request.getApplicationStatus();
 
-
-        if (status !=
-                ApplicationStatus.ACCEPTED
-
+        if (status != ApplicationStatus.ACCEPTED
                 &&
-
-                status !=
-                ApplicationStatus.REJECTED) {
+                status != ApplicationStatus.REJECTED) {
 
             throw new BadRequestException(
                     "Application status must be ACCEPTED or REJECTED");
         }
 
+        // ================= ACCEPT APPLICATION =================
 
-        if (status ==
-                ApplicationStatus.ACCEPTED) {
-
+        if (status == ApplicationStatus.ACCEPTED) {
 
             boolean alreadyMember =
                     projectMemberRepository
@@ -401,20 +370,17 @@ public class ApplicationService {
                                     project,
                                     application.getStudent());
 
-
             if (alreadyMember) {
 
                 throw new ConflictException(
                         "Student is already a project member");
             }
 
-
             long currentMembers =
                     projectMemberRepository
                             .countByProjectAndStatus(
                                     project,
                                     ProjectMemberStatus.ACTIVE);
-
 
             if (currentMembers >=
                     project.getDesiredTeamSize()) {
@@ -423,88 +389,62 @@ public class ApplicationService {
                         "Project team is already full");
             }
 
-
             ProjectMember projectMember =
                     new ProjectMember();
 
-
-            projectMember.setProject(
-                    project);
-
+            projectMember.setProject(project);
 
             projectMember.setStudent(
                     application.getStudent());
 
-
             projectMember.setJoinedAt(
                     LocalDateTime.now());
-
 
             projectMember.setRole(
                     ProjectMemberRole.MEMBER);
 
-
             projectMember.setStatus(
                     ProjectMemberStatus.ACTIVE);
-
 
             projectMemberRepository.save(
                     projectMember);
         }
 
+        // Update application status
 
-        application.setStatus(
-                status);
+        application.setStatus(status);
 
+        applicationRepository.save(application);
 
-        applicationRepository.save(
-                application);
+        // ================= NOTIFICATION =================
 
+        if (status == ApplicationStatus.ACCEPTED) {
 
-        if (status ==
-                ApplicationStatus.ACCEPTED) {
-
-
-            notificationService
-                    .createNotification(
-
-                            application.getStudent(),
-
-                            NotificationType.APPLICATION_ACCEPTED,
-
-                            "Congratulations! Your application for the project "
-                                    + project.getName()
-                                    + " has been accepted."
-                    );
+            notificationService.createNotification(
+                    application.getStudent(),
+                    NotificationType.APPLICATION_ACCEPTED,
+                    "Congratulations! Your application for the project "
+                            + project.getName()
+                            + " has been accepted.");
 
         } else {
 
-
-            notificationService
-                    .createNotification(
-
-                            application.getStudent(),
-
-                            NotificationType.APPLICATION_REJECTED,
-
-                            "Your application for the project "
-                                    + project.getName()
-                                    + " was rejected. Better luck next time."
-                    );
+            notificationService.createNotification(
+                    application.getStudent(),
+                    NotificationType.APPLICATION_REJECTED,
+                    "Your application for the project "
+                            + project.getName()
+                            + " was rejected. Better luck next time.");
         }
-
 
         return new ApiResponse(
                 true,
                 "Application status updated successfully");
     }
 
-
     // ================= HELPER METHOD =================
 
-    private Student
-            getAuthenticatedStudent() {
-
+    private Student getAuthenticatedStudent() {
 
         String email =
                 SecurityContextHolder
@@ -512,19 +452,14 @@ public class ApplicationService {
                         .getAuthentication()
                         .getName();
 
-
         Student student =
-                studentRepository
-                        .findByEmail(
-                                email);
-
+                studentRepository.findByEmail(email);
 
         if (student == null) {
 
             throw new UnauthorizedException(
                     "Authenticated user not found");
         }
-
 
         return student;
     }

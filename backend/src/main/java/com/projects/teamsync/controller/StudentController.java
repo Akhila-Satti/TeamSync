@@ -24,208 +24,178 @@ import com.projects.teamsync.dto.RegisterRequest;
 import com.projects.teamsync.dto.ResetPasswordRequest;
 import com.projects.teamsync.dto.StudentProfileResponse;
 import com.projects.teamsync.dto.UpdateStudentProfile;
-import main.java.com.projects.teamsync.dto.StudentSearchResponse;
+import com.projects.teamsync.dto.StudentSearchResponse;
 import com.projects.teamsync.dto.VerifyOtpRequest;
 
 import com.projects.teamsync.service.StudentService;
 
-import main.java.com.projects.teamsync.dto.StudentSearchResponse;
+import com.projects.teamsync.dto.StudentSearchResponse;
 
 @RestController
 @RequestMapping("/api/students")
 public class StudentController {
 
-    private StudentService studentService;
+        private StudentService studentService;
 
-    public StudentController(
-            StudentService studentService) {
+        public StudentController(
+                        StudentService studentService) {
 
-        this.studentService =
-                studentService;
-    }
+                this.studentService = studentService;
+        }
 
+        // ================= REGISTER =================
 
-    // ================= REGISTER =================
+        @PostMapping("/register")
+        public ResponseEntity<ApiResponse> registerRequest(
+                        @RequestBody RegisterRequest request) {
 
-    @PostMapping("/register")
-    public ResponseEntity<ApiResponse>
-            registerRequest(
-                    @RequestBody
-                    RegisterRequest request) {
+                ApiResponse response = studentService
+                                .registerRequest(request);
 
-        ApiResponse response =
-                studentService
-                        .registerRequest(request);
+                return ResponseEntity
+                                .status(HttpStatus.CREATED)
+                                .body(response);
+        }
 
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(response);
-    }
+        // ================= VERIFY EMAIL =================
 
+        @PostMapping("/verify-email")
+        public ResponseEntity<ApiResponse> verifyEmail(
+                        @RequestBody VerifyOtpRequest request) {
 
-    // ================= VERIFY EMAIL =================
+                return ResponseEntity.ok(
 
-    @PostMapping("/verify-email")
-    public ResponseEntity<ApiResponse>
-            verifyEmail(
-                    @RequestBody
-                    VerifyOtpRequest request) {
+                                studentService
+                                                .verifyEmail(
+                                                                request.getEmail(),
+                                                                request.getOtp()));
+        }
 
-        return ResponseEntity.ok(
+        // ================= RESEND OTP =================
 
-                studentService
-                        .verifyEmail(
-                                request.getEmail(),
-                                request.getOtp())
-        );
-    }
+        @PostMapping("/resend-otp")
+        public ResponseEntity<ApiResponse> resendOtp(
+                        @RequestBody EmailRequest request) {
 
+                return ResponseEntity.ok(
 
-    // ================= RESEND OTP =================
+                                studentService
+                                                .resendOtp(
+                                                                request.getEmail()));
+        }
 
-    @PostMapping("/resend-otp")
-    public ResponseEntity<ApiResponse>
-            resendOtp(
-                    @RequestBody
-                    EmailRequest request) {
+        // ================= LOGIN =================
 
-        return ResponseEntity.ok(
+        @PostMapping("/login")
+        public ResponseEntity<LoginResponse> loginRequest(
+                        @RequestBody LoginRequest request) {
 
-                studentService
-                        .resendOtp(
-                                request.getEmail())
-        );
-    }
+                return ResponseEntity.ok(
 
+                                studentService
+                                                .loginRequest(request));
+        }
 
-    // ================= LOGIN =================
+        // ================= CHANGE PASSWORD =================
 
-    @PostMapping("/login")
-    public ResponseEntity<LoginResponse>
-            loginRequest(
-                    @RequestBody
-                    LoginRequest request) {
+        @PostMapping("/change-password")
+        public ResponseEntity<ApiResponse> changePassword(
+                        @RequestBody ChangePasswordRequest request) {
 
-        return ResponseEntity.ok(
+                return ResponseEntity.ok(
 
-                studentService
-                        .loginRequest(request)
-        );
-    }
+                                studentService
+                                                .changePassword(request));
+        }
 
+        // ================= FORGOT PASSWORD =================
 
-    // ================= CHANGE PASSWORD =================
+        @PostMapping("/forgot-password")
+        public ResponseEntity<ApiResponse> forgotPassword(
+                        @RequestBody ForgotPasswordRequest request) {
 
-    @PostMapping("/change-password")
-    public ResponseEntity<ApiResponse>
-            changePassword(
-                    @RequestBody
-                    ChangePasswordRequest request) {
+                return ResponseEntity.ok(
 
-        return ResponseEntity.ok(
+                                studentService
+                                                .forgotPassword(request));
+        }
 
-                studentService
-                        .changePassword(request)
-        );
-    }
+        // ================= VERIFY RESET OTP =================
 
+        @PostMapping("/verify-reset-otp")
+        public ResponseEntity<ApiResponse> verifyForgotPasswordOtp(
+                        @RequestBody VerifyOtpRequest request) {
 
-    // ================= FORGOT PASSWORD =================
+                return ResponseEntity.ok(
 
-    @PostMapping("/forgot-password")
-    public ResponseEntity<ApiResponse>
-            forgotPassword(
-                    @RequestBody
-                    ForgotPasswordRequest request) {
+                                studentService
+                                                .verifyForgotPasswordOtp(
+                                                                request.getEmail(),
+                                                                request.getOtp()));
+        }
 
-        return ResponseEntity.ok(
+        // ================= RESET PASSWORD =================
 
-                studentService
-                        .forgotPassword(request)
-        );
-    }
+        @PostMapping("/reset-password")
+        public ResponseEntity<ApiResponse> resetPassword(
+                        @RequestBody ResetPasswordRequest request) {
 
+                return ResponseEntity.ok(
 
-    // ================= VERIFY RESET OTP =================
+                                studentService
+                                                .resetPassword(request));
+        }
 
-    @PostMapping("/verify-reset-otp")
-    public ResponseEntity<ApiResponse>
-            verifyForgotPasswordOtp(
-                    @RequestBody
-                    VerifyOtpRequest request) {
+        // ================= VIEW PROFILE =================
 
-        return ResponseEntity.ok(
+        @GetMapping("/profile/{studentId}")
+        public ResponseEntity<StudentProfileResponse> viewProfile(
+                        @PathVariable Integer studentId) {
 
-                studentService
-                        .verifyForgotPasswordOtp(
-                                request.getEmail(),
-                                request.getOtp())
-        );
-    }
+                return ResponseEntity.ok(
 
+                                studentService
+                                                .viewProfile(studentId));
+        }
 
-    // ================= RESET PASSWORD =================
+        // ================= UPDATE PROFILE =================
 
-    @PostMapping("/reset-password")
-    public ResponseEntity<ApiResponse>
-            resetPassword(
-                    @RequestBody
-                    ResetPasswordRequest request) {
+        @PatchMapping("/profile/{studentId}")
+        public ResponseEntity<ApiResponse> updateProfile(
 
-        return ResponseEntity.ok(
+                        @PathVariable Integer studentId,
 
-                studentService
-                        .resetPassword(request)
-        );
-    }
+                        @RequestBody UpdateStudentProfile request) {
 
+                return ResponseEntity.ok(
 
-    // ================= VIEW PROFILE =================
+                                studentService
+                                                .updateProfile(
+                                                                studentId,
+                                                                request));
+        }
 
-    @GetMapping("/profile/{studentId}")
-    public ResponseEntity<StudentProfileResponse>
-            viewProfile(
-                    @PathVariable
-                    Integer studentId) {
+        @GetMapping("/me")
+        public ResponseEntity<StudentProfileResponse> getMyProfile() {
 
-        return ResponseEntity.ok(
+                return ResponseEntity.ok(
+                                studentService.getMyProfile());
+        }
 
-                studentService
-                        .viewProfile(studentId)
-        );
-    }
+        @GetMapping("/search")
+        public ResponseEntity<List<StudentSearchResponse>> searchStudents(
+                        @RequestParam String userName) {
 
+                return ResponseEntity.ok(
 
-    // ================= UPDATE PROFILE =================
-
-    @PatchMapping("/profile/{studentId}")
-    public ResponseEntity<ApiResponse>
-            updateProfile(
-
-                    @PathVariable
-                    Integer studentId,
-
-                    @RequestBody
-                    UpdateStudentProfile request) {
-
-        return ResponseEntity.ok(
-
-                studentService
-                        .updateProfile(
-                                studentId,
-                                request)
-        );
-    }
-
-    @GetMapping("/search")
-public ResponseEntity<List<StudentSearchResponse>>
-        searchStudents(
-                @RequestParam String userName) {
+                                studentService
+                                                .searchStudents(userName));
+        }
+        @PatchMapping("/profile/complete")
+public ResponseEntity<ApiResponse> completeProfile() {
 
     return ResponseEntity.ok(
-
-            studentService
-                    .searchStudents(userName)
+            studentService.completeProfile()
     );
 }
 }

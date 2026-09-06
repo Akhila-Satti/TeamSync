@@ -48,4 +48,7 @@ public class Student {
     @Column(nullable = false)
     private Boolean verified = false;
 
+    @Column(nullable=false)
+    private boolean profileCompleted=false;
+
 }

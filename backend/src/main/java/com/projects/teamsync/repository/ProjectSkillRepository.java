@@ -14,5 +14,6 @@ public interface ProjectSkillRepository extends JpaRepository<ProjectSkill, Inte
     List<ProjectSkill> findByProject(Project project);
     boolean existsByProjectAndSkill(Project project, Skill skill);
     long countByProject(Project project);
+    
 
 }

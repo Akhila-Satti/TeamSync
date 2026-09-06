@@ -17,59 +17,55 @@ import com.projects.teamsync.dto.InvitationStatusRequest;
 
 import com.projects.teamsync.service.InvitationService;
 
-
 @RestController
 @RequestMapping("/api/invitations")
 public class InvitationController {
 
+        private InvitationService invitationService;
 
-    private InvitationService invitationService;
+        public InvitationController(
+                        InvitationService invitationService) {
 
+                this.invitationService = invitationService;
+        }
 
-    public InvitationController(
-            InvitationService invitationService) {
+        // ================= MY INVITATIONS =================
 
-        this.invitationService =
-                invitationService;
-    }
+        @GetMapping("/my-invitations")
+        public ResponseEntity<List<InvitationResponse>> getMyInvitations() {
 
+                return ResponseEntity.ok(
 
-    // ================= MY INVITATIONS =================
+                                invitationService
+                                                .getMyInvitations());
+        }
 
-    @GetMapping("/my-invitations")
-    public ResponseEntity<List<InvitationResponse>>
-            getMyInvitations() {
+        // ================= UPDATE INVITATION STATUS =================
 
+        @PatchMapping("/{invitationId}/status")
+        public ResponseEntity<ApiResponse> updateInvitationStatus(
 
-        return ResponseEntity.ok(
+                        @PathVariable Integer invitationId,
 
-                invitationService
-                        .getMyInvitations()
-        );
-    }
+                        @RequestBody InvitationStatusRequest request) {
 
+                return ResponseEntity.ok(
 
-    // ================= UPDATE INVITATION STATUS =================
+                                invitationService
+                                                .updateInvitationStatus(
 
-    @PatchMapping("/{invitationId}/status")
-    public ResponseEntity<ApiResponse>
-            updateInvitationStatus(
+                                                                invitationId,
 
-                    @PathVariable
-                    Integer invitationId,
+                                                                request));
+        }
+        // ================= PROJECT INVITATIONS =================
 
-                    @RequestBody
-                    InvitationStatusRequest request) {
+        @GetMapping("/project/{projectId}")
+        public ResponseEntity<List<InvitationResponse>> getProjectInvitations(
+                        @PathVariable Integer projectId) {
 
-
-        return ResponseEntity.ok(
-
-                invitationService
-                        .updateInvitationStatus(
-
-                                invitationId,
-
-                                request)
-        );
-    }
+                return ResponseEntity.ok(
+                                invitationService
+                                                .getProjectInvitations(projectId));
+        }
 }

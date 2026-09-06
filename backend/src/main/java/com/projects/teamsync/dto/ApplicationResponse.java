@@ -10,11 +10,22 @@ import lombok.Data;
 
 @Data
 public class ApplicationResponse {
-    private Integer applicationId;
-    private Integer applicantId;
-    private String userName;
-    private ApplicationStatus status;
-    private LocalDateTime date;
-    private List<Skill> skills;
 
+    private Integer applicationId;
+
+    private Integer applicantId;
+
+    private String userName;
+
+    private Integer projectId;
+
+    private String projectName;
+
+    private String projectDescription;
+
+    private ApplicationStatus status;
+
+    private LocalDateTime date;
+
+    private List<Skill> skills;
 }

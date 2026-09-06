@@ -16,17 +16,22 @@ import com.projects.teamsync.dto.MessageResponse;
 import com.projects.teamsync.dto.SendMessageRequest;
 import com.projects.teamsync.service.MessageService;
 
+import com.projects.teamsync.dto.ProjectRoomResponse;
+import com.projects.teamsync.service.ProjectRoomService;
+
 @RestController
 @RequestMapping("/api/rooms")
 public class ChatController {
 
     private MessageService messageService;
+    private ProjectRoomService projectRoomService;
 
     public ChatController(
-            MessageService messageService) {
+            MessageService messageService,ProjectRoomService projectRoomService) {
 
         this.messageService =
                 messageService;
+                this.projectRoomService=projectRoomService;
     }
 
     @MessageMapping("/chat/{roomId}")
@@ -59,4 +64,11 @@ public class ChatController {
         return messageService
                 .getMessages(roomId);
     }
+
+    @GetMapping
+public List<ProjectRoomResponse> getMyProjectRooms() {
+
+    return projectRoomService
+            .getMyProjectRooms();
+}
 }

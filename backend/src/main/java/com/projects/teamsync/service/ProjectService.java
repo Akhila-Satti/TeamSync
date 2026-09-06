@@ -231,11 +231,53 @@ public class ProjectService {
                 true,
                 "Project created successfully");
     }
+public ProjectResponse getProjectById(Integer projectId) {
 
+    Project project = projectRepository.findById(projectId)
+            .orElseThrow(() -> new RuntimeException("Project not found"));
+
+    ProjectResponse response = new ProjectResponse();
+
+    response.setProjectId(project.getId());
+    response.setName(project.getName());
+    response.setDescription(project.getDescription());
+    response.setDomain(project.getDomain());
+    response.setDesiredTeamSize(project.getDesiredTeamSize());
+    response.setStatus(project.getStatus());
+    response.setCreatedAt(project.getCreatedAt());
+
+    response.setCreatorId(project.getCreatedBy().getId());
+    response.setCreatorName(project.getCreatedBy().getUserName());
+
+    // project skills
+    List<ProjectSkillResponse> skills = projectSkillRepository
+            .findByProject(project)
+            .stream()
+            .map(ps -> {
+                ProjectSkillResponse skillResponse = new ProjectSkillResponse();
+                skillResponse.setProjectSkillId(ps.getId());
+                skillResponse.setSkillId(ps.getSkill().getId());
+                skillResponse.setSkillName(ps.getSkill().getName());
+                skillResponse.setImportance(ps.getImportance());
+                return skillResponse;
+            })
+            .toList();
+
+    response.setSkills(skills);
+
+    // current member count
+    Long memberCount = projectMemberRepository
+            .countByProjectAndStatus(project, ProjectMemberStatus.ACTIVE);
+
+    response.setCurrentMemberCount(memberCount);
+
+    return response;
+}
 
     // ================= GET ALL PROJECTS =================
 
     public List<ProjectResponse> getAllProjects() {
+        Student student=getAuthenticatedStudent();
 
         List<Project> projects =
                 projectRepository.findByStatus(
@@ -246,6 +288,7 @@ public class ProjectService {
 
 
         for (Project project : projects) {
+                if(project.getCreatedBy().getId().equals(student.getId())) continue;
 
             responses.add(
                     convertToProjectResponse(project));

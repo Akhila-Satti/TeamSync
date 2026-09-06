@@ -14,5 +14,7 @@ public interface InvitationRepository extends JpaRepository<Invitation, Integer>
 
     List<Invitation> findBySentTo(Student student);
 
+    List<Invitation> findByProject(Project project);
+
     
 }

@@ -1,4 +1,4 @@
-package main.java.com.projects.teamsync.dto;
+package com.projects.teamsync.dto;
 
 import lombok.Data;
 @Data

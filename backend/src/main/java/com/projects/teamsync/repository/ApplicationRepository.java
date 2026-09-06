@@ -12,4 +12,5 @@ public interface ApplicationRepository extends JpaRepository<Application, Intege
 
     boolean existsByStudentAndProject(Student student,Project project);
     List<Application> findByProject(Project project);
+    List<Application> findByStudent(Student student);
 }

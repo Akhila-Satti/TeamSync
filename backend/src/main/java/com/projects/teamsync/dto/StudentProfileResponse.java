@@ -5,13 +5,14 @@ import java.util.List;
 import com.projects.teamsync.enums.Availability;
 
 import lombok.Data;
-
 @Data
 public class StudentProfileResponse {
 
     private Integer studentId;
 
     private String userName;
+
+    private String email;
 
     private String bio;
 
@@ -20,4 +21,6 @@ public class StudentProfileResponse {
     private Availability availability;
 
     private List<StudentSkillResponse> skills;
+
+    private boolean profileCompleted;
 }

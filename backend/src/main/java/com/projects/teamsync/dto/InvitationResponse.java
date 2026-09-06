@@ -14,6 +14,8 @@ public class InvitationResponse {
     private Integer invitationId;
     private Integer projectId;
     private String projectName;
+    private Integer sentToStudentId;
+    private String sentToUserName;
     private String sentBy;
     private String description;
     private List<Skill> projectSkills;

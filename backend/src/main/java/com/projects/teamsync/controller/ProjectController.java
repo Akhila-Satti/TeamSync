@@ -29,6 +29,7 @@ import com.projects.teamsync.service.ProjectService;
 import com.projects.teamsync.service.ProjectSkillService;
 
 
+
 @RestController
 @RequestMapping("/api/projects")
 public class ProjectController {
@@ -341,4 +342,12 @@ public class ProjectController {
                                 projectSkillId)
         );
     }
+    @GetMapping("/{projectId}")
+public ResponseEntity<ProjectResponse> getProjectById(
+        @PathVariable Integer projectId) {
+
+    return ResponseEntity.ok(
+            projectService.getProjectById(projectId)
+    );
+}
 }
