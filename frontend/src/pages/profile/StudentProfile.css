@@ -1,0 +1,282 @@
+.student-profile-page {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* =========================
+   PROFILE
+========================= */
+
+#student-profile {
+  padding: 30px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
+#student-profile h3 {
+  margin-bottom: 20px;
+  color: var(--primary);
+  font-size: 28px;
+}
+
+#student-profile h5 {
+  margin-bottom: 14px;
+  color: var(--text-secondary);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+#student-profile h4 {
+  margin-bottom: 25px;
+  color: var(--text);
+  font-size: 16px;
+}
+
+/* =========================
+   ERROR / SUCCESS
+========================= */
+
+.profile-error {
+  min-height: 20px;
+  margin-bottom: 10px;
+  color: var(--danger);
+  font-size: 14px;
+}
+
+.profile-success {
+  margin-top: 15px;
+  color: var(--success);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.profile-action-error {
+  margin-top: 15px;
+  color: var(--danger);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* =========================
+   SKILLS
+========================= */
+
+#student-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+#student-skills span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 9px 12px;
+  background-color: var(--surface-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+#student-skills span p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+#student-skills span p:first-child {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* =========================
+   ACTION BUTTONS
+========================= */
+
+.student-profile-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.student-profile-actions button {
+  flex: 1;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--primary);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.student-profile-actions button:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.55);
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 600px;
+  max-height: 85vh;
+
+  padding: 28px;
+
+  overflow-y: auto;
+
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
+.modal-content h3 {
+  margin-bottom: 8px;
+  color: var(--primary);
+  font-size: 24px;
+}
+
+.modal-content > p {
+  margin-bottom: 20px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+/* =========================
+   PROJECT SELECTION
+========================= */
+
+.project-selection-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.project-selection-card {
+  padding: 18px;
+
+  background-color: var(--surface-secondary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.project-selection-card h4 {
+  margin-bottom: 10px;
+  color: var(--text);
+  font-size: 18px;
+}
+
+.project-selection-card p {
+  margin-bottom: 7px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.project-selection-card strong {
+  color: var(--text);
+}
+
+.project-selection-card button {
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px 14px;
+
+  border: none;
+  border-radius: 7px;
+
+  background-color: var(--primary);
+  color: white;
+
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.project-selection-card button:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+/* =========================
+   CANCEL BUTTON
+========================= */
+
+.modal-cancel-button {
+  width: 100%;
+  margin-top: 18px;
+  padding: 11px 14px;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  background-color: transparent;
+  color: var(--text);
+
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: background-color 0.2s ease;
+}
+
+.modal-cancel-button:hover {
+  background-color: var(--surface-secondary);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+  #student-profile {
+    padding: 22px;
+  }
+
+  #student-profile h3 {
+    font-size: 24px;
+  }
+
+  .student-profile-actions {
+    flex-direction: column;
+  }
+
+  .student-profile-actions button {
+    width: 100%;
+  }
+
+  .modal-overlay {
+    padding: 12px;
+  }
+
+  .modal-content {
+    max-height: 90vh;
+    padding: 20px;
+  }
+
+  .project-selection-card {
+    padding: 15px;
+  }
+}

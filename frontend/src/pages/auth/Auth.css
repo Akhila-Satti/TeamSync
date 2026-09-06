@@ -1,0 +1,168 @@
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  background-color: var(--bg);
+}
+
+.auth-form {
+  width: 100%;
+  max-width: 420px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
+.auth-form h1 {
+  margin-bottom: 6px;
+  text-align: center;
+  color: var(--primary);
+  font-size: 32px;
+}
+
+.auth-form h2 {
+  margin-bottom: 30px;
+  text-align: center;
+  color: var(--text);
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.auth-form label {
+  margin-bottom: 7px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 20px;
+
+  background-color: var(--surface-secondary);
+  color: var(--text);
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  outline: none;
+}
+
+.auth-form input::placeholder {
+  color: var(--muted);
+}
+
+.auth-form input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(148, 126, 176, 0.2);
+}
+
+.form-message {
+  min-height: 20px;
+  margin-bottom: 4px;
+  text-align: center;
+  color: var(--success);
+}
+
+.form-error {
+  min-height: 20px;
+  margin-bottom: 15px;
+  text-align: center;
+  color: var(--danger);
+}
+
+.primary-button,
+.secondary-button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.primary-button {
+  border: none;
+  background-color: var(--primary);
+  color: white;
+}
+
+.primary-button:hover {
+  background-color: var(--primary-dark);
+}
+
+.secondary-button {
+  margin-top: 12px;
+  border: 1px solid var(--border);
+  background-color: transparent;
+  color: var(--text);
+}
+
+.secondary-button:hover {
+  background-color: var(--surface-secondary);
+  border-color: var(--primary);
+}
+.otp-info {
+  margin-bottom: 25px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.otp-info strong {
+  color: var(--primary);
+  word-break: break-word;
+}
+
+/* ================= FORGOT PASSWORD ================= */
+
+.forgot-password-button {
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px;
+    margin-top: 2px;
+    transition: color 0.2s ease;
+}
+
+.forgot-password-button:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+.password-input-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-input-container input {
+    width: 100%;
+    padding-right: 45px;
+    box-sizing: border-box;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    border: none;
+    background: transparent;
+
+    cursor: pointer;
+
+    font-size: 17px;
+    padding: 4px;
+
+    line-height: 1;
+}

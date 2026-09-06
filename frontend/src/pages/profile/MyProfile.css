@@ -1,0 +1,560 @@
+/* =========================
+   PAGE
+========================= */
+
+.my-profile-page {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.my-profile-title {
+  margin-bottom: 25px;
+  color: var(--primary);
+  font-size: 30px;
+}
+
+/* =========================
+   PROFILE INFO
+========================= */
+
+.profile-info-card {
+  padding: 25px;
+
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+
+  box-shadow: var(--shadow);
+}
+
+.profile-info-card p {
+  margin: 0;
+  padding: 13px 0;
+
+  color: var(--text-secondary);
+  font-size: 15px;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.profile-info-card p:last-child {
+  border-bottom: none;
+}
+
+.profile-info-card strong {
+  display: inline-block;
+  width: 120px;
+  color: var(--text);
+}
+
+/* =========================
+   PROFILE ACTIONS
+========================= */
+
+.profile-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.profile-actions button {
+  padding: 11px 18px;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: var(--primary);
+  color: white;
+
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: background-color 0.2s ease,
+              transform 0.15s ease;
+}
+
+.profile-actions button:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+.profile-actions .logout-button {
+  background-color: var(--danger);
+}
+
+.profile-actions .logout-button:hover {
+  background-color: var(--danger);
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+.profile-section {
+  margin-top: 35px;
+}
+
+.profile-section > h2 {
+  margin-bottom: 20px;
+  color: var(--primary);
+  font-size: 24px;
+}
+
+.profile-section > h3 {
+  margin-bottom: 20px;
+  color: var(--primary);
+  font-size: 24px;
+}
+
+.subsection-title {
+  margin: 25px 0 12px;
+  color: var(--text);
+  font-size: 18px;
+}
+
+.profile-section hr {
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+/* =========================
+   SKILLS
+========================= */
+
+.my-skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.my-skill-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  padding: 15px 18px;
+
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.my-skill-card > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.my-skill-card strong {
+  color: var(--text);
+  font-size: 15px;
+}
+
+.my-skill-card span {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.skill-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.skill-actions button {
+  padding: 7px 12px;
+
+  border: 1px solid var(--border);
+  border-radius: 6px;
+
+  background-color: var(--surface-secondary);
+  color: var(--text);
+
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.skill-actions button:hover {
+  background-color: var(--border);
+}
+
+.skill-actions .delete-button {
+  color: var(--danger);
+}
+
+/* =========================
+   ADD SKILL
+========================= */
+
+.add-skill-form {
+  display: flex;
+  gap: 10px;
+}
+
+.add-skill-form select {
+  flex: 1;
+
+  padding: 11px 12px;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  background-color: var(--surface);
+  color: var(--text);
+
+  outline: none;
+}
+
+.add-skill-form select:focus {
+  border-color: var(--primary);
+}
+
+.add-skill-form button {
+  padding: 11px 18px;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: var(--primary);
+  color: white;
+
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.add-skill-form button:hover {
+  background-color: var(--primary-dark);
+}
+
+.add-skill-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =========================
+   APPLICATIONS
+========================= */
+
+.application-card {
+  margin-bottom: 15px;
+  padding: 20px;
+
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  box-shadow: var(--shadow);
+}
+
+.application-card h3 {
+  margin-bottom: 12px;
+  color: var(--primary);
+  font-size: 19px;
+}
+
+.application-card p {
+  margin-bottom: 8px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.application-card strong {
+  color: var(--text);
+}
+
+/* =========================
+   INVITATIONS
+========================= */
+
+.invitation-card {
+  margin-bottom: 15px;
+  padding: 20px;
+
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  box-shadow: var(--shadow);
+}
+
+.invitation-card h3 {
+  margin-bottom: 12px;
+  color: var(--primary);
+  font-size: 19px;
+}
+
+.invitation-card p {
+  margin-bottom: 8px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.invitation-card strong {
+  color: var(--text);
+}
+
+.invitation-card h4 {
+  margin: 18px 0 8px;
+  color: var(--text);
+}
+
+.invitation-card ul {
+  margin: 0 0 15px;
+  padding-left: 20px;
+}
+
+.invitation-card li {
+  margin-bottom: 5px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.invitation-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.invitation-actions button {
+  padding: 9px 18px;
+
+  border: none;
+  border-radius: 7px;
+
+  color: white;
+
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.accept-button {
+  background-color: var(--success);
+}
+
+.reject-button {
+  background-color: var(--danger);
+}
+
+/* =========================
+   MESSAGES
+========================= */
+
+.empty-message {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.section-error {
+  margin-bottom: 10px;
+  color: var(--danger);
+  font-size: 14px;
+}
+
+/* =========================
+   MODALS
+========================= */
+
+.profile-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background-color: rgba(0, 0, 0, 0.55);
+}
+
+.profile-modal {
+  width: 100%;
+  max-width: 500px;
+
+  padding: 28px;
+
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 15px;
+
+  box-shadow: var(--shadow);
+}
+
+.profile-modal h2 {
+  margin-bottom: 20px;
+  color: var(--primary);
+}
+
+.profile-modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.profile-modal form > div {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.profile-modal label {
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.profile-modal input,
+.profile-modal textarea,
+.profile-modal select {
+  padding: 11px 12px;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  background-color: var(--surface-secondary);
+  color: var(--text);
+
+  font-size: 14px;
+  outline: none;
+}
+
+.profile-modal textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.profile-modal input:focus,
+.profile-modal textarea:focus,
+.profile-modal select:focus {
+  border-color: var(--primary);
+}
+
+.profile-modal form button {
+  padding: 11px 16px;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: var(--primary);
+  color: white;
+
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.profile-modal form button:hover {
+  background-color: var(--primary-dark);
+}
+
+.profile-modal form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.profile-modal form button[type="button"] {
+  background-color: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.profile-modal form button[type="button"]:hover {
+  background-color: var(--surface-secondary);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+  .my-profile-title {
+    font-size: 25px;
+  }
+
+  .profile-info-card {
+    padding: 20px;
+  }
+
+  .profile-info-card strong {
+    display: block;
+    width: auto;
+    margin-bottom: 4px;
+  }
+
+  .profile-actions {
+    flex-direction: column;
+  }
+
+  .profile-actions button {
+    width: 100%;
+  }
+
+  .my-skill-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .skill-actions {
+    width: 100%;
+  }
+
+  .skill-actions button {
+    flex: 1;
+  }
+
+  .add-skill-form {
+    flex-direction: column;
+  }
+
+  .add-skill-form button {
+    width: 100%;
+  }
+
+  .invitation-actions {
+    flex-direction: column;
+  }
+
+  .invitation-actions button {
+    width: 100%;
+  }
+
+  .profile-modal-overlay {
+    padding: 12px;
+  }
+
+  .profile-modal {
+    padding: 20px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+}
+.password-input-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-input-container input {
+    width: 100%;
+    padding-right: 45px;
+    box-sizing: border-box;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    border: none;
+    background: transparent;
+
+    cursor: pointer;
+
+    font-size: 17px;
+    padding: 4px;
+
+    line-height: 1;
+}

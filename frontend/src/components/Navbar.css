@@ -1,0 +1,93 @@
+
+/* =========================
+   NAVBAR
+   ========================= */
+
+.navbar {
+  min-height: 70px;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 35px;
+
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--border);
+
+  box-shadow: var(--shadow);
+
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.navbar-brand {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 0.5px;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navbar-links a {
+  padding: 10px 14px;
+
+  color: var(--text-secondary);
+
+  font-size: 15px;
+  font-weight: 500;
+
+  border-radius: 8px;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.navbar-links a:hover {
+  background-color: var(--surface-secondary);
+  color: var(--text);
+}
+
+.navbar-links a.active {
+  background-color: var(--primary);
+  color: #ffffff;
+}
+
+
+/* =========================
+   THEME TOGGLE
+   ========================= */
+
+.theme-toggle {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--border);
+  border-radius: 50%;
+
+  background-color: var(--surface-secondary);
+  color: var(--text);
+
+  font-size: 18px;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background-color: var(--accent);
+  transform: scale(1.05);
+}

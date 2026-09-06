@@ -1,0 +1,266 @@
+/* =========================
+   CHAT ROOM
+========================= */
+
+.chat-room-page {
+  max-width: 900px;
+  height: calc(100vh - 130px);
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.chat-room-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  margin-bottom: 15px;
+}
+
+.chat-room-header h2 {
+  margin: 0;
+  color: var(--primary);
+  font-size: 26px;
+}
+
+.back-button {
+  padding: 8px 14px;
+
+  border: 1px solid var(--border);
+  border-radius: 7px;
+
+  background-color: var(--surface);
+  color: var(--text);
+
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  background-color: var(--surface-secondary);
+}
+
+/* =========================
+   CONNECTION STATUS
+========================= */
+
+.chat-status {
+  margin-bottom: 12px;
+
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.chat-status.connected {
+  color: var(--success);
+}
+
+.chat-status.disconnected {
+  color: var(--danger);
+}
+
+/* =========================
+   MESSAGES
+========================= */
+
+.messages-container {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+
+  padding: 20px;
+
+  overflow-y: auto;
+
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+
+  box-shadow: var(--shadow);
+}
+
+/* =========================
+   MESSAGE BUBBLES
+========================= */
+
+.my-message,
+.other-message {
+  max-width: 70%;
+  padding: 12px 15px;
+
+  border-radius: 12px;
+
+  word-break: break-word;
+}
+
+.my-message {
+  align-self: flex-end;
+
+  background-color: var(--primary);
+  color: white;
+
+  border-bottom-right-radius: 3px;
+}
+
+.other-message {
+  align-self: flex-start;
+
+  background-color: var(--surface-secondary);
+  color: var(--text);
+
+  border: 1px solid var(--border);
+  border-bottom-left-radius: 3px;
+}
+
+.my-message strong,
+.other-message strong {
+  display: block;
+  margin-bottom: 5px;
+
+  font-size: 13px;
+}
+
+.my-message p,
+.other-message p {
+  margin: 0;
+
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.my-message small,
+.other-message small {
+  display: block;
+
+  margin-top: 6px;
+
+  font-size: 11px;
+  opacity: 0.7;
+
+  text-align: right;
+}
+
+/* =========================
+   EMPTY / ERROR / LOADING
+========================= */
+
+.chat-room-message {
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.chat-room-error {
+  color: var(--danger);
+  text-align: center;
+}
+
+/* =========================
+   MESSAGE INPUT
+========================= */
+
+.chat-input-container {
+  display: flex;
+  gap: 10px;
+
+  margin-top: 15px;
+}
+
+.chat-input {
+  flex: 1;
+
+  padding: 12px 15px;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  background-color: var(--surface);
+  color: var(--text);
+
+  font-size: 14px;
+  outline: none;
+}
+
+.chat-input::placeholder {
+  color: var(--muted);
+}
+
+.chat-input:focus {
+  border-color: var(--primary);
+}
+
+.send-message-button {
+  min-width: 90px;
+
+  padding: 12px 18px;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: var(--primary);
+  color: white;
+
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: background-color 0.2s ease,
+              transform 0.15s ease;
+}
+
+.send-message-button:hover:not(:disabled) {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+.send-message-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+  .chat-room-page {
+    height: calc(100vh - 110px);
+  }
+
+  .chat-room-header {
+    gap: 10px;
+  }
+
+  .chat-room-header h2 {
+    font-size: 22px;
+  }
+
+  .messages-container {
+    padding: 14px;
+  }
+
+  .my-message,
+  .other-message {
+    max-width: 85%;
+  }
+
+  .chat-input-container {
+    gap: 7px;
+  }
+
+  .chat-input {
+    min-width: 0;
+  }
+
+  .send-message-button {
+    min-width: 70px;
+    padding: 11px 12px;
+  }
+}

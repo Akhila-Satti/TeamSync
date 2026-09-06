@@ -1,0 +1,313 @@
+/* =========================
+   Profile Completion Popup
+   ========================= */
+
+.profile-popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 2000;
+    padding: 20px;
+}
+
+.profile-popup {
+    width: 100%;
+    max-width: 600px;
+
+    background: var(--surface);
+    color: var(--text);
+
+    border: 1px solid var(--border);
+    border-radius: 16px;
+
+    padding: 30px;
+
+    box-shadow: var(--shadow);
+
+    animation: profilePopupAppear 0.2s ease;
+}
+
+@keyframes profilePopupAppear {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* Heading */
+
+.profile-popup h2 {
+    margin: 0 0 10px;
+
+    font-size: 24px;
+    font-weight: 700;
+
+    color: var(--text);
+}
+
+.profile-popup-description {
+    margin: 0 0 25px;
+
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* Add skill section */
+
+.add-skill-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 10px;
+
+    margin-bottom: 20px;
+}
+
+.add-skill-row select {
+    width: 100%;
+
+    padding: 11px 12px;
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    background: var(--surface-secondary);
+    color: var(--text);
+
+    font-size: 14px;
+
+    outline: none;
+}
+
+.add-skill-row select:focus {
+    border-color: var(--primary);
+}
+
+
+.add-skill-button {
+    padding: 11px 18px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: var(--primary);
+    color: white;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: background 0.2s ease;
+}
+
+.add-skill-button:hover {
+    background: var(--primary-dark);
+}
+
+
+/* Selected skills */
+
+.selected-skills {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    max-height: 220px;
+    overflow-y: auto;
+
+    margin-bottom: 20px;
+}
+
+.no-skills {
+    margin: 0;
+    padding: 15px;
+
+    text-align: center;
+
+    color: var(--muted);
+    font-size: 14px;
+
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+}
+
+
+.selected-skill {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 12px 14px;
+
+    background: var(--surface-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+.selected-skill div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.selected-skill strong {
+    font-size: 14px;
+    color: var(--text);
+}
+
+.selected-skill span {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+
+.selected-skill button {
+    width: 28px;
+    height: 28px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: transparent;
+    color: var(--muted);
+
+    font-size: 20px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.selected-skill button:hover {
+    background: var(--danger);
+    color: white;
+}
+
+
+/* Error */
+
+.profile-popup .form-error {
+    margin: 10px 0;
+
+    color: var(--danger);
+    font-size: 13px;
+}
+
+
+/* Bottom actions */
+
+.profile-popup-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 20px;
+}
+
+.skip-button {
+    padding: 11px 18px;
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    background: transparent;
+    color: var(--text-secondary);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.skip-button:hover {
+    background: var(--surface-secondary);
+    color: var(--text);
+}
+
+.skip-button:disabled,
+.add-skill-button:disabled,
+.primary-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+/* Primary button */
+
+.profile-popup .primary-button {
+    padding: 11px 22px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: var(--primary);
+    color: white;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: background 0.2s ease;
+}
+
+.profile-popup .primary-button:hover:not(:disabled) {
+    background: var(--primary-dark);
+}
+
+
+/* =========================
+   Mobile
+   ========================= */
+
+@media (max-width: 600px) {
+
+    .profile-popup-overlay {
+        padding: 15px;
+    }
+
+    .profile-popup {
+        padding: 22px;
+        border-radius: 12px;
+    }
+
+    .profile-popup h2 {
+        font-size: 21px;
+    }
+
+    .add-skill-row {
+        grid-template-columns: 1fr;
+    }
+
+    .add-skill-button {
+        width: 100%;
+    }
+
+    .profile-popup-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .skip-button,
+    .profile-popup .primary-button {
+        width: 100%;
+    }
+}

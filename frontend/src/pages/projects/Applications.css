@@ -1,0 +1,269 @@
+/* =========================
+   APPLICATIONS PAGE
+   ========================= */
+
+.applications-page {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+
+/* =========================
+   TITLE
+   ========================= */
+
+.applications-page h2 {
+  margin-bottom: 25px;
+  color: var(--text);
+  font-size: 28px;
+}
+
+
+/* =========================
+   BACK BUTTON
+   ========================= */
+
+.applications-page .back-button {
+  margin-bottom: 25px;
+  padding: 9px 16px;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  background-color: var(--surface);
+  color: var(--text);
+
+  font-weight: 600;
+
+  transition: background-color 0.2s ease,
+              border-color 0.2s ease;
+}
+
+.applications-page .back-button:hover {
+  background-color: var(--surface-secondary);
+  border-color: var(--primary);
+}
+
+
+/* =========================
+   APPLICATION CARD
+   ========================= */
+
+.application-card {
+  margin-bottom: 20px;
+  padding: 25px;
+
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+
+  box-shadow: var(--shadow);
+
+  transition: transform 0.2s ease,
+              border-color 0.2s ease;
+}
+
+.application-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+}
+
+
+/* =========================
+   APPLICANT
+   ========================= */
+
+.application-card h3 {
+  margin-bottom: 15px;
+}
+
+.applicant-button {
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  color: var(--primary);
+
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.applicant-button:hover {
+  color: var(--accent);
+}
+
+
+/* =========================
+   APPLICATION INFO
+   ========================= */
+
+.application-card p {
+  margin-bottom: 10px;
+
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.application-card p:first-of-type {
+  color: var(--text);
+  font-weight: 600;
+}
+
+
+/* =========================
+   SKILLS
+   ========================= */
+
+.application-card h4 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+
+  color: var(--text);
+}
+
+.application-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  list-style: none;
+}
+
+.application-skills li {
+  padding: 7px 12px;
+
+  background-color: var(--surface-secondary);
+
+  border: 1px solid var(--border);
+  border-radius: 20px;
+
+  color: var(--text);
+
+  font-size: 13px;
+}
+
+
+/* =========================
+   ACTIONS
+   ========================= */
+
+.application-actions {
+  display: flex;
+  gap: 10px;
+
+  margin-top: 20px;
+}
+
+.application-actions button {
+  padding: 9px 18px;
+
+  border-radius: 8px;
+
+  font-weight: 600;
+
+  transition: background-color 0.2s ease,
+              transform 0.15s ease;
+}
+
+
+/* Accept */
+
+.application-actions button:first-child {
+  border: none;
+
+  background-color: var(--success);
+  color: white;
+}
+
+.application-actions button:first-child:hover {
+  transform: translateY(-1px);
+}
+
+
+/* Reject */
+
+.application-actions button:last-child {
+  border: none;
+
+  background-color: var(--danger);
+  color: white;
+}
+
+.application-actions button:last-child:hover {
+  transform: translateY(-1px);
+}
+
+
+/* =========================
+   LOADING / ERROR
+   ========================= */
+
+.page-message,
+.page-error {
+  padding: 20px;
+
+  background-color: var(--surface);
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  text-align: center;
+}
+
+.page-message {
+  color: var(--text-secondary);
+}
+
+.page-error {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 700px) {
+
+  .applications-page {
+    width: 100%;
+  }
+
+  .applications-page h2 {
+    font-size: 24px;
+  }
+
+  .application-card {
+    padding: 18px;
+  }
+
+  .applicant-button {
+    font-size: 18px;
+    overflow-wrap: anywhere;
+  }
+
+  .application-card p {
+    font-size: 14px;
+    overflow-wrap: anywhere;
+  }
+
+  .application-actions {
+    flex-direction: column;
+  }
+
+  .application-actions button {
+    width: 100%;
+  }
+
+  .application-skills {
+    gap: 6px;
+  }
+
+  .application-skills li {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}

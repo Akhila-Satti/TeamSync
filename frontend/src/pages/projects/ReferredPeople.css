@@ -1,0 +1,230 @@
+/* =========================
+   REFERRED PEOPLE PAGE
+   ========================= */
+
+.referred-people-page {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+
+/* =========================
+   TITLE
+   ========================= */
+
+.referred-people-page h2 {
+  margin-bottom: 25px;
+
+  color: var(--text);
+  font-size: 28px;
+}
+
+
+/* =========================
+   BACK BUTTON
+   ========================= */
+
+.referred-people-page .back-button {
+  margin-bottom: 25px;
+  padding: 9px 16px;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  background-color: var(--surface);
+  color: var(--text);
+
+  font-weight: 600;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.referred-people-page .back-button:hover {
+  background-color: var(--surface-secondary);
+  border-color: var(--primary);
+}
+
+
+/* =========================
+   REFERRAL CARD
+   ========================= */
+
+.referral-card {
+  margin-bottom: 20px;
+  padding: 25px;
+
+  background-color: var(--surface);
+
+  border: 1px solid var(--border);
+  border-radius: 14px;
+
+  box-shadow: var(--shadow);
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.referral-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+}
+
+
+/* =========================
+   REFERRED PERSON
+   ========================= */
+
+.referral-card h3 {
+  margin-bottom: 15px;
+}
+
+.referred-person-button {
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  color: var(--primary);
+
+  font-size: 20px;
+  font-weight: 700;
+
+  text-decoration: underline;
+}
+
+.referred-person-button:hover {
+  color: var(--accent);
+}
+
+
+/* =========================
+   REFERRAL INFORMATION
+   ========================= */
+
+.referral-card p {
+  margin-bottom: 10px;
+
+  color: var(--text-secondary);
+
+  line-height: 1.5;
+}
+
+.referral-card p:nth-of-type(1) {
+  color: var(--text);
+}
+
+
+/* =========================
+   ACTIONS
+   ========================= */
+
+.referral-actions {
+  display: flex;
+  gap: 10px;
+
+  margin-top: 20px;
+}
+
+.referral-actions button {
+  padding: 9px 18px;
+
+  border: none;
+  border-radius: 8px;
+
+  color: white;
+
+  font-weight: 600;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+
+/* Accept */
+
+.referral-actions button:first-child {
+  background-color: var(--success);
+}
+
+.referral-actions button:first-child:hover {
+  transform: translateY(-1px);
+}
+
+
+/* Reject */
+
+.referral-actions button:last-child {
+  background-color: var(--danger);
+}
+
+.referral-actions button:last-child:hover {
+  transform: translateY(-1px);
+}
+
+
+/* =========================
+   LOADING / ERROR
+   ========================= */
+
+.page-message,
+.page-error {
+  padding: 20px;
+
+  background-color: var(--surface);
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  text-align: center;
+}
+
+.page-message {
+  color: var(--text-secondary);
+}
+
+.page-error {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 700px) {
+
+  .referred-people-page {
+    width: 100%;
+  }
+
+  .referred-people-page h2 {
+    font-size: 24px;
+  }
+
+  .referral-card {
+    padding: 18px;
+  }
+
+  .referred-person-button {
+    font-size: 18px;
+    overflow-wrap: anywhere;
+  }
+
+  .referral-card p {
+    font-size: 14px;
+    overflow-wrap: anywhere;
+  }
+
+  .referral-actions {
+    flex-direction: column;
+  }
+
+  .referral-actions button {
+    width: 100%;
+  }
+}

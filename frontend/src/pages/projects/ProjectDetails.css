@@ -1,0 +1,467 @@
+/* =========================
+   PROJECT DETAILS PAGE
+   ========================= */
+
+.project-details-page {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+
+/* =========================
+   BACK BUTTON
+   ========================= */
+
+.back-button {
+  margin-bottom: 25px;
+  padding: 9px 16px;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  background-color: var(--surface);
+  color: var(--text);
+
+  font-weight: 600;
+
+  transition: background-color 0.2s ease,
+              border-color 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: var(--surface-secondary);
+  border-color: var(--primary);
+}
+
+
+/* =========================
+   PROJECT HEADER
+   ========================= */
+
+.project-header {
+  padding: 28px;
+
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+
+  box-shadow: var(--shadow);
+
+  margin-bottom: 25px;
+}
+
+.project-header h1 {
+  margin-bottom: 18px;
+
+  color: var(--primary);
+  font-size: 30px;
+}
+
+.project-header p {
+  margin-bottom: 8px;
+
+  color: var(--text-secondary);
+}
+
+.project-header p:first-of-type {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+
+/* =========================
+   COMMON SECTIONS
+   ========================= */
+
+.project-info-section,
+.project-management,
+.project-skills-section,
+.add-skill-section,
+.project-members-section {
+  margin-bottom: 25px;
+  padding: 25px;
+
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+
+  box-shadow: var(--shadow);
+}
+
+.project-details-page h2 {
+  margin-bottom: 18px;
+
+  color: var(--text);
+  font-size: 22px;
+}
+
+.project-details-page h3 {
+  margin-bottom: 15px;
+
+  color: var(--text);
+}
+
+
+/* =========================
+   PROJECT INFORMATION
+   ========================= */
+
+.project-info-section p {
+  margin-bottom: 12px;
+
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.project-info-section strong {
+  color: var(--text);
+}
+
+
+/* =========================
+   PROJECT MANAGEMENT
+   ========================= */
+
+.project-management {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.project-management h2 {
+  width: 100%;
+}
+
+.project-management button,
+.member-controls button {
+  padding: 10px 17px;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: var(--primary);
+  color: white;
+
+  font-weight: 600;
+
+  transition: background-color 0.2s ease,
+              transform 0.15s ease;
+}
+
+.project-management button:hover,
+.member-controls button:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+
+/* =========================
+   SKILLS
+   ========================= */
+
+.project-skill {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-bottom: 10px;
+  padding: 12px 15px;
+
+  background-color: var(--surface-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  color: var(--text);
+}
+
+.project-skill span:first-child {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.project-skill span:nth-child(2) {
+  color: var(--text-secondary);
+}
+
+.project-skill button {
+  margin-left: auto;
+
+  padding: 6px 12px;
+
+  border: 1px solid var(--border);
+  border-radius: 6px;
+
+  background-color: transparent;
+  color: var(--text);
+
+  font-size: 13px;
+}
+
+.project-skill button:hover {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+
+.project-skill button + button {
+  margin-left: 0;
+}
+
+
+/* =========================
+   ADD SKILL
+   ========================= */
+
+.add-skill-section {
+  background-color: var(--surface-secondary);
+}
+
+.add-skill-section select,
+.add-skill-section input {
+  padding: 11px 13px;
+
+  background-color: var(--surface);
+  color: var(--text);
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  outline: none;
+}
+
+.add-skill-section select {
+  width: 45%;
+  margin-right: 10px;
+}
+
+.add-skill-section input {
+  width: 25%;
+  margin-right: 10px;
+}
+
+.add-skill-section select:focus,
+.add-skill-section input:focus {
+  border-color: var(--primary);
+
+  box-shadow:
+    0 0 0 3px rgba(148, 126, 176, 0.2);
+}
+
+.add-skill-section button {
+  padding: 11px 17px;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: var(--primary);
+  color: white;
+
+  font-weight: 600;
+}
+
+.add-skill-section button:hover {
+  background-color: var(--primary-dark);
+}
+
+
+/* =========================
+   MEMBERS
+   ========================= */
+
+.member-card {
+  margin-bottom: 12px;
+  padding: 17px;
+
+  background-color: var(--surface-secondary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.member-card p {
+  margin-bottom: 7px;
+
+  color: var(--text-secondary);
+}
+
+.member-card strong {
+  color: var(--primary);
+  font-size: 17px;
+}
+
+.member-card button {
+  margin-top: 8px;
+
+  padding: 7px 13px;
+
+  border: 1px solid var(--danger);
+  border-radius: 7px;
+
+  background-color: transparent;
+  color: var(--danger);
+
+  font-weight: 600;
+}
+
+.member-card button:hover {
+  background-color: var(--danger);
+  color: white;
+}
+
+.member-card hr {
+  display: none;
+}
+
+
+/* =========================
+   MEMBER CONTROLS
+   ========================= */
+
+.member-controls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+
+  margin-top: 10px;
+}
+
+
+/* =========================
+   MODAL
+   ========================= */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 25px;
+
+  background-color: rgba(0, 0, 0, 0.55);
+
+  z-index: 1000;
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 500px;
+
+  padding: 30px;
+
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+
+  box-shadow: var(--shadow);
+}
+
+.modal-content h2 {
+  margin-bottom: 20px;
+}
+
+.modal-content p {
+  margin-bottom: 15px;
+  color: var(--text-secondary);
+}
+
+.modal-content input,
+.modal-content textarea {
+  width: 100%;
+
+  margin-bottom: 15px;
+  padding: 11px 13px;
+
+  background-color: var(--surface-secondary);
+  color: var(--text);
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  outline: none;
+}
+
+.modal-content textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.modal-content input:focus,
+.modal-content textarea:focus {
+  border-color: var(--primary);
+
+  box-shadow:
+    0 0 0 3px rgba(148, 126, 176, 0.2);
+}
+
+.modal-content button {
+  padding: 10px 17px;
+  margin-right: 10px;
+
+  border-radius: 8px;
+
+  font-weight: 600;
+}
+
+.modal-content button:first-of-type {
+  border: none;
+
+  background-color: var(--primary);
+  color: white;
+}
+
+.modal-content button:first-of-type:hover {
+  background-color: var(--primary-dark);
+}
+
+.modal-content button:last-of-type {
+  border: 1px solid var(--border);
+
+  background-color: transparent;
+  color: var(--text);
+}
+
+.modal-content button:last-of-type:hover {
+  background-color: var(--surface-secondary);
+  border-color: var(--primary);
+}
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 700px) {
+  .project-details-page {
+    width: 100%;
+  }
+
+  .project-header,
+  .project-info-section,
+  .project-management,
+  .project-skills-section,
+  .add-skill-section,
+  .project-members-section {
+    padding: 20px;
+  }
+
+  .project-skill {
+    flex-wrap: wrap;
+  }
+
+  .project-skill button {
+    margin-left: 0;
+  }
+
+  .add-skill-section select,
+  .add-skill-section input {
+    width: 100%;
+    margin: 0 0 10px 0;
+  }
+
+  .add-skill-section button {
+    width: 100%;
+  }
+}
